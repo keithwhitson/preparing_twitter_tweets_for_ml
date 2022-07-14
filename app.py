@@ -94,6 +94,7 @@ def get_num_words_cleaned(tweet):
 
 
 def get_num_chars_cleaned(tweet):
+    '''Get chars cleaned'''
     removed_link_tweet = re.sub(r"http\S+", "", tweet)
     removed_mention_tweet = re.sub("@[A-Za-z0-9]+", "", removed_link_tweet)
     removed_non_alpha = re.sub(r'[\W_]+', ' ', removed_mention_tweet)
@@ -103,6 +104,7 @@ def get_num_chars_cleaned(tweet):
 
 
 def get_num_chars_dirty(tweet):
+    '''Get num chars'''
     return len(tweet)
 
 # df = (pd.read_parquet('all_black_twitter_tweets'))
