@@ -35,7 +35,7 @@ class PrepareTweetML:
         self.cleanliness_ratio = self.num_chars_cleaned/self.num_chars_dirty
 
 
-    def vader_sent(self):
+    def vader_sent(self) -> float:
         '''This creates a score for a tweet for social media sentiment'''
         vader_sent_raw = analyzer.polarity_scores(self.tweet)
         vader_sent = vader_sent_raw.get('compound', 0.0)
@@ -50,13 +50,13 @@ class PrepareTweetML:
         return vader_sent_score
 
 
-    def language_detection(self):
+    def language_detection(self) -> str:
         '''Takes a tweet and returns a language'''
         doc = nlp(self.tweet)
         return doc._.language.get('language')
 
 
-    def cleaned_tweet(self):
+    def cleaned_tweet(self) -> str:
         '''Removes whitespace and generally cleans tweet'''
         removed_link_tweet = re.sub(r"http\S+", "", self.tweet)
         removed_mention_tweet = re.sub("@[A-Za-z0-9]+", "", removed_link_tweet)
@@ -67,38 +67,38 @@ class PrepareTweetML:
         return lowercased_tweet
 
 
-    def get_hashtag_count(self):
+    def get_hashtag_count(self) -> int:
         '''Returns the number of hashtags present'''
         hashtags = self.tweet.count('#')
         return hashtags
 
 
-    def get_mentions_count(self):
+    def get_mentions_count(self) -> int:
         '''Returns the number of mentions in tweet'''
         mentions = self.tweet.count('@')
         return mentions
 
 
-    def get_retweets_count(self):
+    def get_retweets_count(self) -> int:
         '''Gets the number of retweets'''
         retweets = self.tweet.count('RT ')
         return retweets
 
 
-    def get_links_count(self):
+    def get_links_count(self) -> int:
         '''Get the number of links'''
         links = self.tweet.count('http')
         return links
 
 
-    def get_num_words_dirty(self):
+    def get_num_words_dirty(self) -> int:
         '''Returns the num of words before cleaning'''
         word_list = self.tweet.split()
         number_of_words = len(word_list)
         return number_of_words
 
 
-    def get_num_words_cleaned(self):
+    def get_num_words_cleaned(self) -> int:
         '''Returns the number of words in the cleaned tweet'''
         removed_link_tweet = re.sub(r"http\S+", "", self.tweet)
         removed_mention_tweet = re.sub("@[A-Za-z0-9]+", "", removed_link_tweet)
@@ -111,7 +111,7 @@ class PrepareTweetML:
         return number_of_words
 
 
-    def get_num_chars_cleaned(self):
+    def get_num_chars_cleaned(self) -> int:
         '''Get chars cleaned'''
         removed_link_tweet = re.sub(r"http\S+", "", self.tweet)
         removed_mention_tweet = re.sub("@[A-Za-z0-9]+", "", removed_link_tweet)
@@ -121,7 +121,7 @@ class PrepareTweetML:
         return len(single_spaced_tweet)
 
 
-    def get_num_chars_dirty(self):
+    def get_num_chars_dirty(self) -> int:
         '''Get num chars'''
         return len(self.tweet)
 
